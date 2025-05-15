@@ -1,0 +1,72 @@
+ <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow border border-gray-200">
+    <h2 class="text-2xl font-bold mb-1">Educational Background</h2>
+    <p class="text-gray-500 mb-6">List your academic qualifications</p>
+
+    <div id="education-container" class="space-y-6">
+      <!-- Education Block Template -->
+      <div class="education-entry bg-gray-50 p-6 rounded border relative">
+        <p class="text-lg font-semibold mb-4">Education #1 
+          <button onclick="removeEducation(this)" class="text-sm text-gray-500 hover:text-red-500 absolute right-4 top-4">🗑 Remove</button>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block font-semibold mb-1">Institution</label>
+            <input type="text" class="w-full border rounded px-3 py-2" placeholder="Enter institution name">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Degree</label>
+            <input type="text" class="w-full border rounded px-3 py-2" placeholder="Enter degree earned">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block font-semibold mb-1">Field of Study</label>
+          <input type="text" class="w-full border rounded px-3 py-2" placeholder="Enter field of study">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold mb-1">Start Year</label>
+            <input type="text" class="w-full border rounded px-3 py-2" placeholder="e.g., 2022">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">End Year (or expected)</label>
+            <input type="text" class="w-full border rounded px-3 py-2" placeholder="Leave blank if currently studying">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Education Button -->
+    <button onclick="addEducation()" class="mt-6 inline-flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">
+      + Add Education
+    </button>
+  </div>
+
+
+   <script>
+    let count = 1;
+
+    function addEducation() {
+      count++;
+      const container = document.getElementById('education-container');
+      const newBlock = container.firstElementChild.cloneNode(true);
+      newBlock.querySelector('p').innerHTML = `Education #${count} <button onclick="removeEducation(this)" class="text-sm text-gray-500 hover:text-red-500 absolute right-4 top-4">🗑 Remove</button>`;
+      
+      // Clear input fields
+      newBlock.querySelectorAll('input').forEach(input => input.value = '');
+      
+      container.appendChild(newBlock);
+    }
+
+    function removeEducation(button) {
+      const container = document.getElementById('education-container');
+      if (container.children.length > 1) {
+        button.closest('.education-entry').remove();
+      } else {
+        alert("At least one education entry is required.");
+      }
+    }
+  </script>
+  
